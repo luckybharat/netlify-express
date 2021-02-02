@@ -4,6 +4,7 @@ const express = require("express");
 const serverless = require("serverless-http");
 const { mongooseSRV } = require("./keys");
 const app = express();
+const cors = require("cors");
 
 const router = express.Router();
 
@@ -196,6 +197,7 @@ router.get("/", (req, res) => {
   res.json({ hello: "hi" });
 });
 app.use(express.json());
+app.use(cors());
 app.use("/.netlify/functions/app", router);
 
 module.exports.handler = serverless(app);
